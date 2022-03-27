@@ -40,11 +40,11 @@ while True:
     for obj in button_list:
         img = obj.draw_button(img)
 
-    if lmList1 or lmList2:
+    if lmList1:
         for obj in button_list:
             x, y = obj.pos
             w, h = obj.size
-            if x < lmList1[8][0] < x+w:
+            if x < lmList1[8][0] < x+w  and y < lmList1[8][1] < y+h:
                 cv2.rectangle(img, obj.pos, (x + w, y + h), (0, 255, 0), cv2.FILLED)
                 cv2.putText(img, obj.text, (x + 20, y + 65), cv2.FONT_HERSHEY_COMPLEX, 2, (255, 255, 255),
                             5)
