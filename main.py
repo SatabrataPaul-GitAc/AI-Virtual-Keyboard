@@ -17,7 +17,8 @@ for i in range(len(keys)):
     for x, k in enumerate(keys[i]):
         button_list.append(Button((100*x+50, 100*i+50), k))
 
-
+lmList1 = []
+lmList2 = []
 while True:
     success, img = capture.read()
     hands, img = detector.findHands(img)
@@ -38,5 +39,15 @@ while True:
 
     for obj in button_list:
         img = obj.draw_button(img)
+
+    if lmList1 or lmList2:
+        for obj in button_list:
+            x, y = obj.pos
+            w, h = obj.size
+            if x < lmList1[8][0] < x+w:
+                cv2.rectangle(img, obj.pos, (x + w, y + h), (0, 255, 0), cv2.FILLED)
+                cv2.putText(img, obj.text, (x + 20, y + 65), cv2.FONT_HERSHEY_COMPLEX, 2, (255, 255, 255),
+                            5)
+
     cv2.imshow("Myimage", img)
     cv2.waitKey(2)
